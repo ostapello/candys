@@ -26,8 +26,8 @@ def test_classifier(classifiers, X, y, random_st=None, test_size=0.2):
         y_pred.append(classifier.predict(X_test))
 
     # Вывод результатов
-    for i, classifier in enumerate(classifiers):
-        print("{} - labels predicted by {}".format(y_pred[i], type(classifier).__name__))
-    print("{} - true labels".format(y_test))
+    # for i, classifier in enumerate(classifiers):
+    #     print("{} - labels predicted by {}".format(y_pred[i], type(classifier).__name__))
+    # print("{} - true labels".format(y_test))
     for classifier in classifiers:
         print("Accuracy:", classifier.score(X_test, y_test))
