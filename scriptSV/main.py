@@ -30,7 +30,7 @@ class MatchAnalyze:
         stats_from_file.columns = stats_from_file.iloc[0]
         stats_from_file = stats_from_file.iloc[1:-1]
         stats_from_file = stats_from_file.reset_index(drop=True)
-        stats_from_file.iloc[:, 1:] = stats_from_file.iloc[:, 1:].applymap(int)
+        stats_from_file.iloc[:, 1:] = stats_from_file.iloc[:, 1:].map(int)
 
         columns = (['Состав',
                     'Голы', 'Ассисты', 'Ключ. действ. : полож.', 'Ключ. действ.: отриц.',
@@ -153,11 +153,11 @@ class MatchAnalyze:
     def __def_stats_init(self):
         self.def_stats = self.stats_df[
             ['Состав', 'Отбор: забрал', 'Отбор: В аут', 'Заработал на себе фолы', 'Сам сфолил']]
-        self.def_stats = self.def_stats.sort_values(by='Состав')
+        self.def_stats = self.def_stats.sort_values(by='Отбор: забрал', ascending=False)
 
     def __strike_stats_init(self):
         self.strike_stats = self.stats_df[['Состав', 'Удары в створ', 'Заблокированные', 'Мимо', 'Голы']]
-        self.strike_stats = self.strike_stats.sort_values(by='Состав')
+        self.strike_stats = self.strike_stats.sort_values(by=['Голы', 'Удары в створ', 'Заблокированные', 'Мимо'], ascending=False)
 
     @staticmethod
     def create_pdf_table(data, pdf_filename):
